@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/6 | 一个大菠萝@iOS笔记</title>
+  <title>FMDB的使用方法（附Demo) | 一个大菠萝@iOS笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录学习数据结构与算法、iOS底层的历程">
-<meta name="keywords" content="数据结构与算法、iOS底层、Runtime、RunLoop、Block、NSObject、GCD与多线程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一个大菠萝@iOS笔记">
-<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
+  <meta name="description" content="最近在项目中需要在多个页面对同样的数据进行相关操作，于是便用到了FMDB数据库操作，以下便是FMDB的一些简单的使用方法。附Demo一份:FMDBDemo">
+<meta name="keywords" content="底层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FMDB的使用方法（附Demo)">
+<meta property="og:url" content="http://yoursite.com/2018/06/22/FMDB的使用方法（附Demo)/index.html">
 <meta property="og:site_name" content="一个大菠萝@iOS笔记">
-<meta property="og:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta property="og:description" content="最近在项目中需要在多个页面对同样的数据进行相关操作，于是便用到了FMDB数据库操作，以下便是FMDB的一些简单的使用方法。附Demo一份:FMDBDemo">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-1f6ae532531130a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-c6d085258fc90359.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-3356fa3ccc31bfdb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-7611b944d48abdea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-22T02:59:59.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个大菠萝@iOS笔记">
-<meta name="twitter:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta name="twitter:title" content="FMDB的使用方法（附Demo)">
+<meta name="twitter:description" content="最近在项目中需要在多个页面对同样的数据进行相关操作，于是便用到了FMDB数据库操作，以下便是FMDB的一些简单的使用方法。附Demo一份:FMDBDemo">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1940317-1f6ae532531130a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="一个大菠萝@iOS笔记" type="application/atom+xml">
   
@@ -166,44 +172,93 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-FMDB的使用方法（附Demo)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/iOS面试准备之思维导图/" class="archive-article-date">
-  	<time datetime="2018-06-22T01:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/iOS面试准备之思维导图/">iOS面试准备之思维导图</a>
+    <h1 class="article-title" itemprop="name">
+      FMDB的使用方法（附Demo)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/06/22/FMDB的使用方法（附Demo)/" class="archive-article-date">
+  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在项目中需要在多个页面对同样的数据进行相关操作，于是便用到了FMDB数据库操作，以下便是FMDB的一些简单的使用方法。附Demo一份:<a href="https://github.com/NoobGodzzz/FMDBDemo" target="_blank" rel="noopener">FMDBDemo</a></p>
+<a id="more"></a>
+<p> 1.为了更好的的进行管理，先创建了FMDB的单例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@interface DataBase : NSObject</span><br><span class="line">+ (instancetype)sharedDataBase;</span><br><span class="line"></span><br><span class="line">#import &quot;DataBase.h&quot;</span><br><span class="line"></span><br><span class="line">#import &lt;FMDB.h&gt;</span><br><span class="line"></span><br><span class="line">#import &quot;Person.h&quot;</span><br><span class="line">#import &quot;Car.h&quot;</span><br><span class="line">static DataBase *_DBCtl = nil;</span><br><span class="line"></span><br><span class="line">@interface DataBase()&lt;NSCopying,NSMutableCopying&gt;&#123;</span><br><span class="line">    FMDatabase  *_db;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation DataBase</span><br><span class="line"></span><br><span class="line">+(instancetype)sharedDataBase&#123;</span><br><span class="line">    </span><br><span class="line">    if (_DBCtl == nil) &#123;</span><br><span class="line">        </span><br><span class="line">        _DBCtl = [[DataBase alloc] init];</span><br><span class="line">        </span><br><span class="line">        [_DBCtl initDataBase];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return _DBCtl;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(instancetype)allocWithZone:(struct _NSZone *)zone&#123;</span><br><span class="line">    </span><br><span class="line">    if (_DBCtl == nil) &#123;</span><br><span class="line">        </span><br><span class="line">        _DBCtl = [super allocWithZone:zone];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return _DBCtl;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(id)copy&#123;</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(id)mutableCopy&#123;</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(id)copyWithZone:(NSZone *)zone&#123;</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(id)mutableCopyWithZone:(NSZone *)zone&#123;</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-(void)initDataBase&#123;</span><br><span class="line">    // 获得Documents目录路径</span><br><span class="line">    </span><br><span class="line">    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];</span><br><span class="line">    </span><br><span class="line">    // 文件路径</span><br><span class="line">    </span><br><span class="line">    NSString *filePath = [documentsPath stringByAppendingPathComponent:@&quot;model.sqlite&quot;];</span><br><span class="line">    </span><br><span class="line">    // 实例化FMDataBase对象</span><br><span class="line">    </span><br><span class="line">    _db = [FMDatabase databaseWithPath:filePath];</span><br><span class="line">    </span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    // 初始化数据表</span><br><span class="line">    NSString *personSql = @&quot;CREATE TABLE &apos;person&apos; (&apos;id&apos; INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,&apos;person_id&apos; VARCHAR(255),&apos;person_name&apos; VARCHAR(255),&apos;person_age&apos; VARCHAR(255),&apos;person_number&apos;VARCHAR(255)) &quot;;</span><br><span class="line">    NSString *carSql = @&quot;CREATE TABLE &apos;car&apos; (&apos;id&apos; INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,&apos;own_id&apos; VARCHAR(255),&apos;car_id&apos; VARCHAR(255),&apos;car_brand&apos; VARCHAR(255),&apos;car_price&apos;VARCHAR(255)) &quot;;</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:personSql];</span><br><span class="line">    [_db executeUpdate:carSql];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在创建好了数据库，可以保存person对象与car对象的相关属性<br>数据库中创建了两张表person表与car表，分别管理person的数据与car的数据，通过person_id 与own_id进行关联</p>
+<p>2.提供接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - Person</span><br><span class="line">/**</span><br><span class="line"> *  添加person</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)addPerson:(Person *)person;</span><br><span class="line">/**</span><br><span class="line"> *  删除person</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)deletePerson:(Person *)person;</span><br><span class="line">/**</span><br><span class="line"> *  更新person</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)updatePerson:(Person *)person;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  获取所有数据</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (NSMutableArray *)getAllPerson;</span><br><span class="line"></span><br><span class="line">#pragma mark - Car</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  给person添加车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)addCar:(Car *)car toPerson:(Person *)person;</span><br><span class="line">/**</span><br><span class="line"> *  给person删除车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)deleteCar:(Car *)car fromPerson:(Person *)person;</span><br><span class="line">/**</span><br><span class="line"> *  获取person的所有车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (NSMutableArray *)getAllCarsFromPerson:(Person *)person;</span><br><span class="line">/**</span><br><span class="line"> *  删除person的所有车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)deleteAllCarsFromPerson:(Person *)person;</span><br></pre></td></tr></table></figure>
+<p>3.接口的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - 接口</span><br><span class="line"></span><br><span class="line">- (void)addPerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    NSNumber *maxID = @(0);</span><br><span class="line">    </span><br><span class="line">    FMResultSet *res = [_db executeQuery:@&quot;SELECT * FROM person &quot;];</span><br><span class="line">    //获取数据库中最大的ID</span><br><span class="line">    while ([res next]) &#123;</span><br><span class="line">        if ([maxID integerValue] &lt; [[res stringForColumn:@&quot;person_id&quot;] integerValue]) &#123;</span><br><span class="line">            maxID = @([[res stringForColumn:@&quot;person_id&quot;] integerValue] ) ;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    maxID = @([maxID integerValue] + 1);</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;INSERT INTO person(person_id,person_name,person_age,person_number)VALUES(?,?,?,?)&quot;,maxID,person.name,@(person.age),@(person.number)];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)deletePerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;DELETE FROM person WHERE person_id = ?&quot;,person.ID];</span><br><span class="line"></span><br><span class="line">    [_db close];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)updatePerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;UPDATE &apos;person&apos; SET person_name = ?  WHERE person_id = ? &quot;,person.name,person.ID];</span><br><span class="line">    [_db executeUpdate:@&quot;UPDATE &apos;person&apos; SET person_age = ?  WHERE person_id = ? &quot;,@(person.age),person.ID];</span><br><span class="line">    [_db executeUpdate:@&quot;UPDATE &apos;person&apos; SET person_number = ?  WHERE person_id = ? &quot;,@(person.number + 1),person.ID];</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSMutableArray *)getAllPerson&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *dataArray = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    FMResultSet *res = [_db executeQuery:@&quot;SELECT * FROM person&quot;];</span><br><span class="line">    </span><br><span class="line">    while ([res next]) &#123;</span><br><span class="line">        Person *person = [[Person alloc] init];</span><br><span class="line">        person.ID = @([[res stringForColumn:@&quot;person_id&quot;] integerValue]);</span><br><span class="line">        person.name = [res stringForColumn:@&quot;person_name&quot;];</span><br><span class="line">        person.age = [[res stringForColumn:@&quot;person_age&quot;] integerValue];</span><br><span class="line">        person.number = [[res stringForColumn:@&quot;person_number&quot;] integerValue];</span><br><span class="line">        </span><br><span class="line">        [dataArray addObject:person];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    return dataArray;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  给person添加车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)addCar:(Car *)car toPerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    //根据person是否拥有car来添加car_id</span><br><span class="line">    NSNumber *maxID = @(0);</span><br><span class="line">    </span><br><span class="line">    FMResultSet *res = [_db executeQuery:[NSString stringWithFormat:@&quot;SELECT * FROM car where own_id = %@ &quot;,person.ID]];</span><br><span class="line">    </span><br><span class="line">    while ([res next]) &#123;</span><br><span class="line">        if ([maxID integerValue] &lt; [[res stringForColumn:@&quot;car_id&quot;] integerValue]) &#123;</span><br><span class="line">             maxID = @([[res stringForColumn:@&quot;car_id&quot;] integerValue]);</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">     maxID = @([maxID integerValue] + 1);</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;INSERT INTO car(own_id,car_id,car_brand,car_price)VALUES(?,?,?,?)&quot;,person.ID,maxID,car.brand,@(car.price)];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  给person删除车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)deleteCar:(Car *)car fromPerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;DELETE FROM car WHERE own_id = ?  and car_id = ? &quot;,person.ID,car.car_id];</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  获取person的所有车辆</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (NSMutableArray *)getAllCarsFromPerson:(Person *)person&#123;</span><br><span class="line">    </span><br><span class="line">    [_db open];</span><br><span class="line">    NSMutableArray  *carArray = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    FMResultSet *res = [_db executeQuery:[NSString stringWithFormat:@&quot;SELECT * FROM car where own_id = %@&quot;,person.ID]];</span><br><span class="line">    while ([res next]) &#123;</span><br><span class="line">        Car *car = [[Car alloc] init];</span><br><span class="line">        car.own_id = person.ID;</span><br><span class="line">        car.car_id = @([[res stringForColumn:@&quot;car_id&quot;] integerValue]);</span><br><span class="line">        car.brand = [res stringForColumn:@&quot;car_brand&quot;];</span><br><span class="line">        car.price = [[res stringForColumn:@&quot;car_price&quot;] integerValue];</span><br><span class="line">        </span><br><span class="line">        [carArray addObject:car];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    [_db close];</span><br><span class="line">    </span><br><span class="line">    return carArray;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (void)deleteAllCarsFromPerson:(Person *)person&#123;</span><br><span class="line">    [_db open];</span><br><span class="line">    </span><br><span class="line">    [_db executeUpdate:@&quot;DELETE FROM car WHERE own_id = ?&quot;,person.ID];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [_db close];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提供了公共接口之后，在任何一个页面都能进行数据的操作<br>4 使用<br> 1).添加数据</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1940317-1f6ae532531130a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加person.png"></p>
+<p>只要在右上角的点击事件中填写如下代码，可以很快的在数据库中添加person数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  /**</span><br><span class="line"> *  添加数据到数据库</span><br><span class="line"> */</span><br><span class="line">- (void)addData&#123;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;addData&quot;);</span><br><span class="line">    </span><br><span class="line">    int nameRandom = arc4random_uniform(1000);</span><br><span class="line">    NSInteger ageRandom  = arc4random_uniform(100) + 1;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    NSString *name = [NSString stringWithFormat:@&quot;person_%d号&quot;,nameRandom];</span><br><span class="line">    NSInteger age = ageRandom;</span><br><span class="line">    </span><br><span class="line">    Person *person = [[Person alloc] init];</span><br><span class="line">    person.name = name;</span><br><span class="line">    person.age = age;</span><br><span class="line">    </span><br><span class="line">    [[DataBase sharedDataBase] addPerson:person];</span><br><span class="line">    </span><br><span class="line">    self.dataArray = [[DataBase sharedDataBase] getAllPerson];</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    [self.tableView reloadData];</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2).删除数据</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1940317-c6d085258fc90359.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="删除car.png"></p>
+<p>删除某个person的某辆car</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  设置删除按钮</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    </span><br><span class="line">    if (editingStyle == UITableViewCellEditingStyleDelete)&#123;</span><br><span class="line">        </span><br><span class="line">        Car *car = self.carArray[indexPath.row];</span><br><span class="line">        </span><br><span class="line">        NSLog(@&quot;car.id--%@,own_id--%@&quot;,car.car_id,car.own_id);</span><br><span class="line">        [[DataBase sharedDataBase] deleteCar:car fromPerson:self.person];</span><br><span class="line">        self.carArray = [[DataBase sharedDataBase] getAllCarsFromPerson:self.person];</span><br><span class="line">        </span><br><span class="line">        [self.tableView reloadData];</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3).修改数据<br>修改person的name 与 age</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1940317-3356fa3ccc31bfdb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="更新person.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    </span><br><span class="line">//    /****************跳转页面 查看car***************/</span><br><span class="line">//    PersonCarsViewController *pcvc = [[PersonCarsViewController alloc] init];</span><br><span class="line">//    pcvc.person = self.dataArray[indexPath.row];</span><br><span class="line">//    </span><br><span class="line">//    [self.navigationController pushViewController:pcvc animated:YES];</span><br><span class="line">//    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">   /****************person的更新操作***************/</span><br><span class="line">    </span><br><span class="line">    Person *person = self.dataArray[indexPath.row];</span><br><span class="line">    </span><br><span class="line">    person.name = [NSString stringWithFormat:@&quot;%@&quot;,person.name];</span><br><span class="line">    </span><br><span class="line">    person.age = arc4random_uniform(100) + 1;</span><br><span class="line">    [[DataBase sharedDataBase] updatePerson:person];</span><br><span class="line">    </span><br><span class="line">    self.dataArray = [[DataBase sharedDataBase] getAllPerson];</span><br><span class="line">    </span><br><span class="line">    [self.tableView reloadData];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4).查看数据</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1940317-7611b944d48abdea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查看所有数据.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">self.dataArray = [[DataBase sharedDataBase] getAllPerson];</span><br><span class="line">    </span><br><span class="line">    for (int i = 0 ; i &lt; self.dataArray.count; i++) &#123;</span><br><span class="line">        Person *person = self.dataArray[i];</span><br><span class="line">        NSMutableArray *carArray =  [[DataBase sharedDataBase] getAllCarsFromPerson:person];</span><br><span class="line">        [self.carArray addObject:carArray];</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以上便是通过FMDB对对象数据进行了有效的保存，同时使用单例能够很方便的在各个控制器进行数据的操作，希望这个demo能够帮到大家快速的使用FMDB进行数据的储存操作。(<em>^__^</em>)</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
         		</li>
@@ -211,137 +266,64 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/FMDB的使用方法（附Demo)/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/iOS面试准备之思维导图/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS面试准备之思维导图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">多线程与内存管理读书摘录（引用计数ARC篇）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/FMDB的使用方法（附Demo)/">FMDB的使用方法（附Demo)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/">多线程与内存管理读书摘录（引用计数ARC篇）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/">在Object-C中学习数据结构与算法之排序算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -364,8 +346,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

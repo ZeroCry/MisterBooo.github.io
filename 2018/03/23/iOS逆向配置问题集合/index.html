@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/6 | 一个大菠萝@iOS笔记</title>
+  <title>iOS逆向配置问题集合 | 一个大菠萝@iOS笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录学习数据结构与算法、iOS底层的历程">
-<meta name="keywords" content="数据结构与算法、iOS底层、Runtime、RunLoop、Block、NSObject、GCD与多线程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一个大菠萝@iOS笔记">
-<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
+  <meta name="description" content="1. iOS 9.3.3中使用 dumpdecrypted Killed: 9前提: Mac已经登录上 iPhone ,我用的账号是root 有最高权限 还有mobile 账户,权限没有root高 这里使用的是iFunBox可视化工具 查看iPhone 文件">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS逆向配置问题集合">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/iOS逆向配置问题集合/index.html">
 <meta property="og:site_name" content="一个大菠萝@iOS笔记">
-<meta property="og:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta property="og:description" content="1. iOS 9.3.3中使用 dumpdecrypted Killed: 9前提: Mac已经登录上 iPhone ,我用的账号是root 有最高权限 还有mobile 账户,权限没有root高 这里使用的是iFunBox可视化工具 查看iPhone 文件">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181709.png">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181502.png">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181835.png">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181526.png">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-182202.png">
+<meta property="og:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-15218005601923.jpg">
+<meta property="og:updated_time" content="2018-06-22T03:00:13.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个大菠萝@iOS笔记">
-<meta name="twitter:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta name="twitter:title" content="iOS逆向配置问题集合">
+<meta name="twitter:description" content="1. iOS 9.3.3中使用 dumpdecrypted Killed: 9前提: Mac已经登录上 iPhone ,我用的账号是root 有最高权限 还有mobile 账户,权限没有root高 这里使用的是iFunBox可视化工具 查看iPhone 文件">
+<meta name="twitter:image" content="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181709.png">
   
     <link rel="alternative" href="/atom.xml" title="一个大菠萝@iOS笔记" type="application/atom+xml">
   
@@ -166,182 +174,137 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-iOS逆向配置问题集合" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS逆向配置问题集合
+    </h1>
+  
+
+        
+        <a href="/2018/03/23/iOS逆向配置问题集合/" class="archive-article-date">
+  	<time datetime="2018-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-23</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-iOS-9-3-3中使用-dumpdecrypted-Killed-9"><a href="#1-iOS-9-3-3中使用-dumpdecrypted-Killed-9" class="headerlink" title="1. iOS 9.3.3中使用 dumpdecrypted Killed: 9"></a>1. iOS 9.3.3中使用 dumpdecrypted Killed: 9</h2><p>前提: Mac已经登录上 iPhone ,我用的账号是root 有最高权限 还有mobile 账户,权限没有root高</p>
+<p>这里使用的是iFunBox可视化工具 查看iPhone 文件</p>
+<a id="more"></a>
+<p>一开始在iPhone <code>[ /var/root/ ]</code> 放入了<code>dumpdecrypted.dylib</code> 库<br>执行<br>cd 到对用的文件夹下:<br><code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/containers/Bundle/Application/07346B4D-3C49-4638-9FB3-B6E4628F0F6B/YoudaoDictPro.app/YoudaoDictPro</code><br>报错: Killed: 9<br>实验发现好像只在iOS9.3.3 发生了这个错误,iOS9.1.1 并没有报错<br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181709.png" alt=""><br>解决方法<br>这时改变用户到mobile 下</p>
+<p><code>$ su mobile</code><br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181502.png" alt=""><br>这时会提示你输入密码,原因是之前用root账户登录的现在改变账户名</p>
+<p>把 <code>dumpdecrypted.dylib</code> 库复制到这个目录下<br><code>/var/mobile/Documents</code><br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181835.png" alt=""><br><code>$cd /var/mobile/Documents</code></p>
+<p><code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/containers/Bundle/Application/07346B4D-3C49-4638-9FB3-B6E4628F0F6B/YoudaoDictPro.app/YoudaoDictPro</code><br>执行后会在这个文件下生成 脱壳后的 APP<br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-181526.png" alt=""></p>
+<p>结果：<br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-QQ20180323-182202.png" alt=""><br><img src="http://oriq21dog.bkt.clouddn.com/bloc/2018-03-23-15218005601923.jpg" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/iOS面试准备之思维导图/" class="archive-article-date">
-  	<time datetime="2018-06-22T01:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/iOS面试准备之思维导图/">iOS面试准备之思维导图</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">逆向</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/FMDB的使用方法（附Demo)/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在Object-C中学习数据结构与算法之排序算法
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/FMDB的使用方法（附Demo)/">FMDB的使用方法（附Demo)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/">多线程与内存管理读书摘录（引用计数ARC篇）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/">在Object-C中学习数据结构与算法之排序算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -364,8 +327,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

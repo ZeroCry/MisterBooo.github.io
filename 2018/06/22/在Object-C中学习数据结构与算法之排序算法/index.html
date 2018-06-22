@@ -6,19 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/6 | 一个大菠萝@iOS笔记</title>
+  <title>在Object-C中学习数据结构与算法之排序算法 | 一个大菠萝@iOS笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录学习数据结构与算法、iOS底层的历程">
-<meta name="keywords" content="数据结构与算法、iOS底层、Runtime、RunLoop、Block、NSObject、GCD与多线程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一个大菠萝@iOS笔记">
-<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
+  <meta name="description" content="笔者在学习数据结构与算法时，尝试着将排序算法以动画的形式呈现出来更加方便理解记忆，本文配合Demo 在Object-C中学习数据结构与算法之排序算法阅读更佳。  目录 选择排序 冒泡排序 插入排序 快速排序 双路快速排序 三路快速排序 堆排序 总结与收获 参考与阅读  选择排序选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。">
+<meta name="keywords" content="数据结构,算法面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Object-C中学习数据结构与算法之排序算法">
+<meta property="og:url" content="http://yoursite.com/2018/06/22/在Object-C中学习数据结构与算法之排序算法/index.html">
 <meta property="og:site_name" content="一个大菠萝@iOS笔记">
-<meta property="og:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta property="og:description" content="笔者在学习数据结构与算法时，尝试着将排序算法以动画的形式呈现出来更加方便理解记忆，本文配合Demo 在Object-C中学习数据结构与算法之排序算法阅读更佳。  目录 选择排序 冒泡排序 插入排序 快速排序 双路快速排序 三路快速排序 堆排序 总结与收获 参考与阅读  选择排序选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-1880d2dbbcb870cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-07668d3384994785.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-cae760ef70cbee4f.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-1ceaa2d597a70ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-8dc33420af5a2c6d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-2077d692db61b564.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-35298fd830ba3d62.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-eec0ebe320986852.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-db37f4baacd0a8c8.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-fcec5630a7e8fd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-279ac21f88e95f7d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1940317-b1becc14b2a331f3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-06-22T02:59:18.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个大菠萝@iOS笔记">
-<meta name="twitter:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta name="twitter:title" content="在Object-C中学习数据结构与算法之排序算法">
+<meta name="twitter:description" content="笔者在学习数据结构与算法时，尝试着将排序算法以动画的形式呈现出来更加方便理解记忆，本文配合Demo 在Object-C中学习数据结构与算法之排序算法阅读更佳。  目录 选择排序 冒泡排序 插入排序 快速排序 双路快速排序 三路快速排序 堆排序 总结与收获 参考与阅读  选择排序选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1940317-1880d2dbbcb870cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="一个大菠萝@iOS笔记" type="application/atom+xml">
   
@@ -166,154 +180,192 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-在Object-C中学习数据结构与算法之排序算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Object-C中学习数据结构与算法之排序算法
+    </h1>
+  
+
+        
+        <a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" class="archive-article-date">
+  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1940317-1880d2dbbcb870cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>笔者在学习数据结构与算法时，尝试着将排序算法以动画的形式呈现出来更加方便理解记忆，本文配合<a href="https://github.com/MisterBooo/Play-With-Sort-OC" target="_blank" rel="noopener">Demo 在Object-C中学习数据结构与算法之排序算法</a>阅读更佳。</p>
+</blockquote>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>选择排序</li>
+<li>冒泡排序</li>
+<li>插入排序</li>
+<li>快速排序</li>
+<li>双路快速排序</li>
+<li>三路快速排序</li>
+<li>堆排序</li>
+<li>总结与收获</li>
+<li>参考与阅读</li>
+</ul>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<a id="more"></a>
+<h4 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置</p>
+</li>
+<li><p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+</li>
+<li><p>重复第二步，直到所有元素均排序完毕。</p>
+</li>
+</ol>
+<h4 id="2-动画演示"><a href="#2-动画演示" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-07668d3384994785.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**选择排序*/</span><br><span class="line">- (void)mb_selectionSort&#123;</span><br><span class="line">    for (int i = 0; i &lt; self.count; i++) &#123;</span><br><span class="line">        for (int j = i + 1; j &lt; self.count ; j++) &#123;</span><br><span class="line">            if (self.comparator(self[i],self[j]) == NSOrderedDescending) &#123;</span><br><span class="line">                [self mb_exchangeWithIndexA:i  indexB:j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
+<h4 id="1-算法步骤-1"><a href="#1-算法步骤-1" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+</li>
+<li><p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+</li>
+<li><p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+</li>
+<li><p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+</li>
+</ol>
+<h4 id="2-动画演示-1"><a href="#2-动画演示-1" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-cae760ef70cbee4f.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-1"><a href="#3-代码实现-1" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**冒泡排序*/</span><br><span class="line">- (void)mb_bubbleSort&#123;</span><br><span class="line">    bool swapped;</span><br><span class="line">    do &#123;</span><br><span class="line">        swapped = false;</span><br><span class="line">        for (int i = 1; i &lt; self.count; i++) &#123;</span><br><span class="line">            if (self.comparator(self[i - 1],self[i]) == NSOrderedDescending) &#123;</span><br><span class="line">                swapped = true;</span><br><span class="line">                [self mb_exchangeWithIndexA:i  indexB:i- 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; while (swapped);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。<br><img src="http://upload-images.jianshu.io/upload_images/1940317-1ceaa2d597a70ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="1-算法步骤-2"><a href="#1-算法步骤-2" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
+</li>
+<li><p>从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+</li>
+</ol>
+<h4 id="2-动画演示-2"><a href="#2-动画演示-2" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-8dc33420af5a2c6d.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-2"><a href="#3-代码实现-2" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**插入排序*/</span><br><span class="line">- (void)mb_insertionSort&#123;</span><br><span class="line">    for (int i = 0; i &lt; self.count; i++) &#123;</span><br><span class="line">        id e = self[i];</span><br><span class="line">        int j;</span><br><span class="line">        for (j = i; j &gt; 0 &amp;&amp; self.comparator(self[j - 1],e) == NSOrderedDescending; j--) &#123;</span><br><span class="line">            [self mb_exchangeWithIndexA:j  indexB:j- 1];</span><br><span class="line">        &#125;</span><br><span class="line">        self[j] = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
+<p>作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：</p>
+<blockquote>
+<ol>
+<li>自上而下的递归（所有递归的方法都可以用迭代重写，所以就有了第 2 种方法）  </li>
+<li>自下而上的迭代；</li>
+</ol>
+</blockquote>
+<p>本文使用的是<strong>自顶向下</strong>的归并排序</p>
+<h4 id="1-算法步骤-3"><a href="#1-算法步骤-3" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</p>
+</li>
+<li><p>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</p>
+</li>
+<li><p>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</p>
+</li>
+<li><p>重复步骤 3 直到某一指针达到序列尾；</p>
+</li>
+<li><p>将另一序列剩下的所有元素直接复制到合并序列尾。</p>
+</li>
+</ol>
+<h4 id="2-动画演示-3"><a href="#2-动画演示-3" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-2077d692db61b564.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-3"><a href="#3-代码实现-3" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**归并排序 自顶向下*/</span><br><span class="line">- (void)mb_mergeSort&#123;</span><br><span class="line">    [self mb_mergeSortArray:self LeftIndex:0 rightIndex:(int)self.count - 1];</span><br><span class="line">&#125;</span><br><span class="line">- (void)mb_mergeSortArray:(NSMutableArray *)array LeftIndex:(int )l rightIndex:(int)r&#123;</span><br><span class="line">    if(l &gt;= r) return;</span><br><span class="line">    int mid = (l + r) / 2;</span><br><span class="line">    [self mb_mergeSortArray:self LeftIndex:l rightIndex:mid];</span><br><span class="line">    [self mb_mergeSortArray:self LeftIndex:mid + 1 rightIndex:r];</span><br><span class="line">    [self mb_mergeSortArray:self LeftIndex:l midIndex:mid rightIndex:r];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)mb_mergeSortArray:(NSMutableArray *)array LeftIndex:(int )l midIndex:(int )mid rightIndex:(int )r&#123;</span><br><span class="line"></span><br><span class="line">    SEL func = NSSelectorFromString(@&quot;resetSortArray:&quot;);</span><br><span class="line">    // 开辟新的空间 r-l+1的空间</span><br><span class="line">    NSMutableArray *aux = [NSMutableArray arrayWithCapacity:r-l+1];</span><br><span class="line">    for (int i = l; i &lt;= r; i++) &#123;</span><br><span class="line">        // aux 中索引 i-l 的对象 与 array 中索引 i 的对象一致</span><br><span class="line">        aux[i-l] = self[i];</span><br><span class="line">    &#125;</span><br><span class="line">    // 初始化，i指向左半部分的起始索引位置l；j指向右半部分起始索引位置mid+1</span><br><span class="line">    int i = l, j = mid + 1;</span><br><span class="line">    for ( int k = l; k &lt;= r; k++) &#123;</span><br><span class="line">        if (i &gt; mid) &#123; // 如果左半部分元素已经全部处理完毕</span><br><span class="line">            self.comparator(nil, nil);</span><br><span class="line">            self[k] = aux[j - l];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;else if(j &gt; r)&#123;// 如果右半部分元素已经全部处理完毕</span><br><span class="line">            self.comparator(nil, nil);</span><br><span class="line">            self[k] = aux[i - l];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;else if(self.comparator(aux[i - l], aux[j - l]) == NSOrderedAscending)&#123;// 左半部分所指元素 &lt; 右半部分所指元素</span><br><span class="line">            self[k] = aux[i - l];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            self.comparator(nil, nil);</span><br><span class="line">            self[k] = aux[j - l];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        NSMutableArray *mutArray = [NSMutableArray array];</span><br><span class="line">        [self enumerateObjectsUsingBlock:^(MBBarView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">            [mutArray addObject:[NSString stringWithFormat:@&quot;%f&quot;,obj.frame.size.height]];</span><br><span class="line">        &#125;];</span><br><span class="line">        </span><br><span class="line">        objc_msgSendSortArray(self.vc,func,mutArray);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序 n 个项目要 Ο(nlogn) 次比较。在最坏状况下则需要 Ο(n2) 次比较，但这种状况并不常见。事实上，快速排序通常明显比其他 Ο(nlogn) 算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。</p>
+<p>快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
+<p>快速排序又是一种分而治之思想在排序算法上的典型应用。本质上来看，快速排序应该算是在冒泡排序基础上的递归分治法。</p>
+<p>快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高！它是处理大数据最快的排序算法之一了。</p>
+<h4 id="1-算法步骤-4"><a href="#1-算法步骤-4" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>从数列中挑出一个元素，称为 “基准”（pivot）;</p>
+</li>
+<li><p>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
+</li>
+<li><p>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
+</li>
+</ol>
+<p><strong>快速排序的优化可考虑当分区间隔小的的时候转而使用插入排序</strong></p>
+<h4 id="2-动画演示-4"><a href="#2-动画演示-4" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-35298fd830ba3d62.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-4"><a href="#3-代码实现-4" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**快速排序*/</span><br><span class="line">- (void)mb_quickSort&#123;</span><br><span class="line">    //要特别注意边界的情况</span><br><span class="line">    [self mb_quickSort:self indexL:0 indexR:(int)self.count - 1];</span><br><span class="line">&#125;</span><br><span class="line">- (void)mb_quickSort:(NSMutableArray *)array indexL:(int)l indexR:(int)r&#123;</span><br><span class="line">    if (l &gt;= r) return;</span><br><span class="line">    int p = [self __partition:array indexL:l indexR:r];</span><br><span class="line">    [self mb_quickSort:array indexL:l indexR:p-1];</span><br><span class="line">    [self mb_quickSort:array indexL:p + 1 indexR:r];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> 对arr[l...r]部分进行partition操作</span><br><span class="line"> 返回p, 使得arr[l...p-1] &lt; arr[p] ; arr[p+1...r] &gt; arr[p]</span><br><span class="line"> </span><br><span class="line"> @param array array</span><br><span class="line"> @param l 左</span><br><span class="line"> @param r 右</span><br><span class="line"> @return 返回p</span><br><span class="line"> */</span><br><span class="line">- (int)__partition:(NSMutableArray *)array indexL:(int)l indexR:(int)r&#123;</span><br><span class="line">    int j = l;// arr[l+1...j] &lt; v ; arr[j+1...i) &gt; v</span><br><span class="line">    for (int i = l + 1; i &lt;= r ; i++) &#123;</span><br><span class="line">        if ( self.comparator(array[i], array[ l]) == NSOrderedAscending) &#123;</span><br><span class="line">            j++;</span><br><span class="line">            //交换</span><br><span class="line">            [self mb_exchangeWithIndexA:j indexB:i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    self.comparator(nil, nil);</span><br><span class="line">    [self mb_exchangeWithIndexA:j indexB:l];</span><br><span class="line">    return j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双路快速排序"><a href="#双路快速排序" class="headerlink" title="双路快速排序"></a>双路快速排序</h3><p>过多重复键值使Quick Sort降至O(n^2)<br>使用双快速排序后, 我们的快速排序算法可以轻松的处理包含大量元素的数组<br><strong>快速排序的优化可考虑当分区间隔小的的时候转而使用插入排序</strong></p>
+<h4 id="1-算法图示"><a href="#1-算法图示" class="headerlink" title="1.算法图示"></a>1.算法图示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-eec0ebe320986852.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="2-动画演示-5"><a href="#2-动画演示-5" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-db37f4baacd0a8c8.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-5"><a href="#3-代码实现-5" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**双路快排*/</span><br><span class="line">///使用双快速排序后, 我们的快速排序算法可以轻松的处理包含大量元素的数组</span><br><span class="line">- (void)mb_identicalQuickSort&#123;</span><br><span class="line">    //要特别注意边界的情况</span><br><span class="line">    [self mb_quickSort:self indexL:0 indexR:(int)self.count - 1];</span><br><span class="line">&#125;</span><br><span class="line">- (void)mb_identicalQuickSort:(NSMutableArray *)array indexL:(int)l indexR:(int)r&#123;</span><br><span class="line">    if (l &gt;= r) return;</span><br><span class="line">    int p = [self __partition2:array indexL:l indexR:r];</span><br><span class="line">    [self mb_quickSort:array indexL:l indexR:p-1];</span><br><span class="line">    [self mb_quickSort:array indexL:p + 1 indexR:r];</span><br><span class="line">&#125;</span><br><span class="line">- (int)__partition2:(NSMutableArray *)array indexL:(int)l indexR:(int)r&#123;</span><br><span class="line">    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot</span><br><span class="line">    [self mb_exchangeWithIndexA:l indexB:(arc4random()%(r-l+1))];</span><br><span class="line">    id v = array[l];</span><br><span class="line">    // arr[l+1...i) &lt;= v; arr(j...r] &gt;= v</span><br><span class="line">    int i = l + 1, j = r;</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        </span><br><span class="line">        while (i &lt;= r &amp;&amp; self.comparator(array[i],v) == NSOrderedAscending)</span><br><span class="line">            i++;</span><br><span class="line">        </span><br><span class="line">        while (j &gt; l + 1 &amp;&amp; self.comparator(array[j],v) == NSOrderedDescending)</span><br><span class="line">            j--;</span><br><span class="line">        </span><br><span class="line">        if (i &gt; j) &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        [self mb_exchangeWithIndexA:i indexB:j];</span><br><span class="line">        </span><br><span class="line">        i++;</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    [self mb_exchangeWithIndexA:l indexB:j];</span><br><span class="line"></span><br><span class="line">    return j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三路快速排序"><a href="#三路快速排序" class="headerlink" title="三路快速排序"></a>三路快速排序</h3><p>对于包含有大量重复数据的数组, 三路快排有巨大的优势<br>对于一般性的随机数组和近乎有序的数组, 三路快排的效率虽然不是最优的, 但是是在非常可以接受的范围里<br>因此, 在一些语言中, 三路快排是默认的语言库函数中使用的排序算法。比如Java:)</p>
+<p><strong>快速排序的优化可考虑当分区间隔小的的时候转而使用插入排序</strong></p>
+<h4 id="1-算法图示-1"><a href="#1-算法图示-1" class="headerlink" title="1.算法图示"></a>1.算法图示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-fcec5630a7e8fd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="2-动画演示-6"><a href="#2-动画演示-6" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-279ac21f88e95f7d.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-6"><a href="#3-代码实现-6" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - /**三路快排*/</span><br><span class="line">//对于包含有大量重复数据的数组, 三路快排有巨大的优势</span><br><span class="line">- (void)mb_quick3WaysSort&#123;</span><br><span class="line">    //要特别注意边界的情况</span><br><span class="line">    [self mb_quick3WaysSort:self indexL:0 indexR:(int)self.count - 1];</span><br><span class="line">&#125;</span><br><span class="line">/// 递归的三路快速排序算法</span><br><span class="line">- (void)mb_quick3WaysSort:(NSMutableArray *)array indexL:(int)l indexR:(int)r&#123;</span><br><span class="line"></span><br><span class="line">    if (l &gt;= r)  return;</span><br><span class="line">    </span><br><span class="line">    self.comparator(nil, nil);</span><br><span class="line">    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot</span><br><span class="line">    [self mb_exchangeWithIndexA:l indexB:(arc4random_uniform(r-l+1) + l)];</span><br><span class="line">    </span><br><span class="line">    id v = array[l];</span><br><span class="line">    </span><br><span class="line">    int lt = l; // array[l+1...lt] &lt; v</span><br><span class="line">    int gt = r + 1; // array[gt...r] &gt; v</span><br><span class="line">    int i = l + 1; // array[lt+1...i) == v</span><br><span class="line">    </span><br><span class="line">    while (i &lt; gt) &#123;</span><br><span class="line">        if ( [self compareWithBarOne:array[i] andBarTwo:v] == NSOrderedAscending) &#123;</span><br><span class="line">            self.comparator(nil, nil);</span><br><span class="line">            [self mb_exchangeWithIndexA:i indexB:lt + 1];</span><br><span class="line"></span><br><span class="line">            i++;</span><br><span class="line">            lt++;</span><br><span class="line">        &#125;else if  ([self compareWithBarOne:array[i] andBarTwo:v] == NSOrderedDescending)&#123;</span><br><span class="line">            self.comparator(nil, nil);</span><br><span class="line">            [self mb_exchangeWithIndexA:i indexB:gt - 1];</span><br><span class="line">            gt--;</span><br><span class="line">        &#125;else&#123; //array[i] == v</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    self.comparator(nil,nil);</span><br><span class="line">    [self mb_exchangeWithIndexA:l indexB:lt];</span><br><span class="line"></span><br><span class="line">    [self mb_quick3WaysSort:array indexL:l indexR:lt-1];</span><br><span class="line">    [self mb_quick3WaysSort:array indexL:gt indexR:r];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：</p>
+<p>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；<br>小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；<br>堆排序的平均时间复杂度为 Ο(nlogn)。</p>
+<h4 id="1-算法步骤-5"><a href="#1-算法步骤-5" class="headerlink" title="1.算法步骤"></a>1.算法步骤</h4><ol>
+<li><p>创建一个堆 H[0……n-1]；</p>
+</li>
+<li><p>把堆首（最大值）和堆尾互换；</p>
+</li>
+<li><p>把堆的尺寸缩小 1，并调用 shift_down(1)，目的是把新的数组顶端数据调整到相应位置；</p>
+</li>
+<li><p>重复步骤 2，直到堆的尺寸为 1</p>
+</li>
+</ol>
+<h4 id="2-动画演示-7"><a href="#2-动画演示-7" class="headerlink" title="2.动画演示"></a>2.动画演示</h4><p><img src="http://upload-images.jianshu.io/upload_images/1940317-b1becc14b2a331f3.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h4 id="3-代码实现-7"><a href="#3-代码实现-7" class="headerlink" title="3.代码实现"></a>3.代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">///shift_down操作</span><br><span class="line">- (void)shiftDown:(int )k&#123;</span><br><span class="line">    while (2 * k &lt;= _count) &#123;</span><br><span class="line">        int j = 2 * k;</span><br><span class="line">        if (j + 1 &lt;= _count &amp;&amp; [self heapCompareWithBarOne:_data[j + 1] andBarTwo:_data[j]] == NSOrderedDescending) j++;//左孩子小于右孩子</span><br><span class="line">        if ([self heapCompareWithBarOne:_data[k] andBarTwo:_data[j]] == NSOrderedDescending) break;//父节点大于子节点</span><br><span class="line">        self.comparator(nil, nil);</span><br><span class="line">        [_data mb_exchangeWithIndexA:k indexB:j];</span><br><span class="line">        k = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结与收获"><a href="#总结与收获" class="headerlink" title="总结与收获"></a>总结与收获</h3><p><strong>总结</strong>： 在这次重新学习数据结构与算法的过程中笔者充分认识到了学习这些所谓的<strong>基础知识</strong>的重要性，了解了要想进一步提供iOS开发的水平恰恰不能忽视基础环节，也恰好在这次学习中用到了图的深度遍历解决了在研究埋点过程中找到回溯源的问题。  </p>
+<p><strong>收获</strong>：</p>
+<blockquote>
+<ol>
+<li>基本排序的白板编程</li>
+<li>runtime的添加分类</li>
+<li>runtime的objc_msgSend()</li>
+<li>深拷贝与浅拷贝</li>
+<li>GCD信号量的使用</li>
+</ol>
+</blockquote>
+<p> 如果各位读者看完有所收获欢迎在<a href="https://github.com/MisterBooo/Play-With-Sort-OC" target="_blank" rel="noopener">Github</a>上给个star 谢谢各位</p>
+<h3 id="参考与阅读"><a href="#参考与阅读" class="headerlink" title="参考与阅读"></a>参考与阅读</h3><ul>
+<li><a href="https://github.com/hustcc/JS-Sorting-Algorithm" target="_blank" rel="noopener">一本关于排序算法的 GitBook 在线书籍 《十大经典排序算法》，使用 JavaScript &amp; Python &amp; Go 实现</a></li>
+<li><a href="https://juejin.im/post/594dfe795188250d725a220a" target="_blank" rel="noopener">在 JavaScript 中学习数据结构与算法</a></li>
+<li><a href="https://github.com/JiongXing/JXSort" target="_blank" rel="noopener">排序动画</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/iOS面试准备之思维导图/" class="archive-article-date">
-  	<time datetime="2018-06-22T01:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/iOS面试准备之思维导图/">iOS面试准备之思维导图</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/FMDB的使用方法（附Demo)/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/FMDB的使用方法（附Demo)/">FMDB的使用方法（附Demo)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/">多线程与内存管理读书摘录（引用计数ARC篇）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/">在Object-C中学习数据结构与算法之排序算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -329,19 +381,64 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          多线程与内存管理读书摘录（引用计数ARC篇）
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/03/23/iOS逆向配置问题集合/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS逆向配置问题集合</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -364,8 +461,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

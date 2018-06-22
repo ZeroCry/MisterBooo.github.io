@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/6 | 一个大菠萝@iOS笔记</title>
+  <title>多线程与内存管理读书摘录（引用计数ARC篇） | 一个大菠萝@iOS笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录学习数据结构与算法、iOS底层的历程">
-<meta name="keywords" content="数据结构与算法、iOS底层、Runtime、RunLoop、Block、NSObject、GCD与多线程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一个大菠萝@iOS笔记">
-<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
+  <meta name="description" content="一.内存管理的思考方式1.引用计数的思考方式： 自己生成的对象，自己持有 非自己生成的对象，自己也能持有 不再需要自己持有的对象时释放 非自己持有的对象无法释放 对象操作与Objective-C 方法的对应     对象操作 Objcetive-C 方法     生成并持有对象 alloc/new/copy/mutableCopy 等方法   持有对象 retain   释放对象 release">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程与内存管理读书摘录（引用计数ARC篇）">
+<meta property="og:url" content="http://yoursite.com/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/index.html">
 <meta property="og:site_name" content="一个大菠萝@iOS笔记">
-<meta property="og:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta property="og:description" content="一.内存管理的思考方式1.引用计数的思考方式： 自己生成的对象，自己持有 非自己生成的对象，自己也能持有 不再需要自己持有的对象时释放 非自己持有的对象无法释放 对象操作与Objective-C 方法的对应     对象操作 Objcetive-C 方法     生成并持有对象 alloc/new/copy/mutableCopy 等方法   持有对象 retain   释放对象 release">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-22T02:59:42.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个大菠萝@iOS笔记">
-<meta name="twitter:description" content="记录学习数据结构与算法、iOS底层的历程">
+<meta name="twitter:title" content="多线程与内存管理读书摘录（引用计数ARC篇）">
+<meta name="twitter:description" content="一.内存管理的思考方式1.引用计数的思考方式： 自己生成的对象，自己持有 非自己生成的对象，自己也能持有 不再需要自己持有的对象时释放 非自己持有的对象无法释放 对象操作与Objective-C 方法的对应     对象操作 Objcetive-C 方法     生成并持有对象 alloc/new/copy/mutableCopy 等方法   持有对象 retain   释放对象 release">
   
     <link rel="alternative" href="/atom.xml" title="一个大菠萝@iOS笔记" type="application/atom+xml">
   
@@ -166,36 +167,287 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-多线程与内存管理读书摘录（引用计数ARC篇）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/iOS面试准备之思维导图/" class="archive-article-date">
-  	<time datetime="2018-06-22T01:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/iOS面试准备之思维导图/">iOS面试准备之思维导图</a>
+    <h1 class="article-title" itemprop="name">
+      多线程与内存管理读书摘录（引用计数ARC篇）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" class="archive-article-date">
+  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一-内存管理的思考方式"><a href="#一-内存管理的思考方式" class="headerlink" title="一.内存管理的思考方式"></a>一.内存管理的思考方式</h1><h3 id="1-引用计数的思考方式："><a href="#1-引用计数的思考方式：" class="headerlink" title="1.引用计数的思考方式："></a>1.引用计数的思考方式：</h3><ul>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己也能持有</li>
+<li>不再需要自己持有的对象时释放</li>
+<li><p>非自己持有的对象无法释放</p>
+<h5 id="对象操作与Objective-C-方法的对应"><a href="#对象操作与Objective-C-方法的对应" class="headerlink" title="对象操作与Objective-C 方法的对应"></a>对象操作与Objective-C 方法的对应</h5></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对象操作</th>
+<th>Objcetive-C 方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成并持有对象</td>
+<td>alloc/new/copy/mutableCopy 等方法</td>
+</tr>
+<tr>
+<td>持有对象</td>
+<td>retain</td>
+</tr>
+<tr>
+<td>释放对象</td>
+<td>release</td>
+</tr>
+<tr>
+<td>废弃对象</td>
+<td>dealloc</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h4 id="2-alloc-retain-release-dealloc-实现"><a href="#2-alloc-retain-release-dealloc-实现" class="headerlink" title="2.alloc/retain.release/dealloc 实现"></a>2.alloc/retain.release/dealloc 实现</h4><p>GNUstep是Cocoa框架的互换框架。理解了GNUstep源代码也就相当于理解了苹果的Cocoa实现。</p>
+<p>a.通过allocWithZone:类方法调用NSAllocateObject函数分配了对象。</p>
+<p>b.NSAllocateObject函数通过调用NSZoneMalloc函数来分配存放对象所需的内存空间，之后将改内存空间置0，最后返回作为对象而使用的指针。</p>
+<p>c.NSZone:为防止内存碎片化而引入的结构</p>
+<h5 id="总结：GNUstep中alloc-retain-release-dealloc-的实现"><a href="#总结：GNUstep中alloc-retain-release-dealloc-的实现" class="headerlink" title="总结：GNUstep中alloc/retain/release/dealloc 的实现"></a>总结：GNUstep中alloc/retain/release/dealloc 的实现</h5><ul>
+<li>在Objective-C的对象中存有引用计数这一整数值。</li>
+<li>调用alloc或是retain方法后，引用计数值加1</li>
+<li>调用release后，引用计数值减1</li>
+<li>引用计数值为0时，调用dealloc方法废弃对象</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>GNUstep的实现</th>
+<th>苹果的实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将引用计数保存在对象占用内存块头部的变量中</td>
+<td>保存在引用计数表的记录中</td>
+</tr>
+<tr>
+<td>少量代码即可完成</td>
+<td>对象用内存块的分配无需考虑内存块头部</td>
+</tr>
+<tr>
+<td>能够统一管理引用计数用内存块与对象用内存块</td>
+<td>引用计数表各记录中存有内存快地址，可从各个记录追溯到各对象的内存块</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-autorelease理解"><a href="#3-autorelease理解" class="headerlink" title="3.autorelease理解"></a>3.autorelease理解</h4><p>定义：自动释放，当对象实例超出作用域（相当于变量作用域）时，对象实例的release实例方法被调用。</p>
+<ul>
+<li>生成并持有NSAutoreleasePool对象</li>
+<li>调用已分配对象的autorelease实例方法</li>
+<li>废弃NSAutoreleasePool对象</li>
+</ul>
+<h5 id="autorelease实现"><a href="#autorelease实现" class="headerlink" title="autorelease实现"></a>autorelease实现</h5><table>
+<thead>
+<tr>
+<th>GNUstep的实现</th>
+<th>苹果的实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>atuorelease实例方法的本质就是调用NSAutoreleasePool对象的addObject方法</td>
+<td>通过objc4库的runtime/objc-arr.mm 确认autorelease实现 类似</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-ARC规则"><a href="#4-ARC规则" class="headerlink" title="4.ARC规则"></a>4.ARC规则</h4><h5 id="A-所有权修饰符"><a href="#A-所有权修饰符" class="headerlink" title="A.所有权修饰符"></a>A.所有权修饰符</h5><ul>
+<li>__strong 修饰符</li>
+<li>__weak 修饰符</li>
+<li>__unsafe _unretained 修饰符</li>
+<li>__autoreleasing 修饰符</li>
+</ul>
+<h5 id="1-strong-修饰符"><a href="#1-strong-修饰符" class="headerlink" title="1).__strong 修饰符"></a>1).__strong 修饰符</h5><p>  __strong 修饰符是id类型和对象类型默认的所有权修饰符，表示对对象的“强引用”。持有强引用的变量在超出其作用域是被废弃，随着强引用的失效，引用的对象会随之释放。通过  _strong 修饰符，不必再次键入retain或者release,完美地满足了 “引用计数式内存管理的思考方式”。</p>
+<h5 id="2-weak-修饰符"><a href="#2-weak-修饰符" class="headerlink" title="2).__weak 修饰符"></a>2).__weak 修饰符</h5><p><strong>循环引用容易发生内存泄露。所谓内存泄漏就是应当废弃的对象在超出其生存周期后继续存在</strong></p>
+<p>__weak 修饰符的一个优点：在持有某对象的弱引用时，若该对象被废弃，则此弱引用将自动失效且处于nil被赋值的状态（空弱引用）。</p>
+<h5 id="3-unsafe-unretained-修饰符"><a href="#3-unsafe-unretained-修饰符" class="headerlink" title="3).__unsafe _unretained 修饰符"></a>3).__unsafe _unretained 修饰符</h5><p><strong>weak 修饰符只能用于iOS5 以上以及OS X Lion 以上版本的应用程序，之下版本使用了 </strong>unsafe _unretained 修饰符。</p>
+<p><strong>unsafe _unretained  是不安全的所有权修饰符，附有 </strong>unsafe _unretained 修饰符的变量不属于编译器的内存管理对象。</p>
+<h5 id="4-autoreleasing-修饰符"><a href="#4-autoreleasing-修饰符" class="headerlink" title="4).__autoreleasing 修饰符"></a>4).__autoreleasing 修饰符</h5><p>ARC有效时<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool&#123;</span><br><span class="line">   id __autoreleasing obj = [[NSObject alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>指定“@autoreleasepool块”来替代“NSAutoreleasePool类对象生成、持有以及废弃”这一范围。</p>
+<p>id的指针或对象的指针会默认附加上__autoreleasing 修饰符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL) performOperationWithError:(NSError **) error;</span><br><span class="line">等同于</span><br><span class="line">- (BOOL) performOperationWithError:(NSError * __autoreleaasing *) error;</span><br></pre></td></tr></table></figure>
+<p>赋值给对象指针是，所有权修饰符必须一致</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">///正确写法</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSError *__strong *pError = &amp;error;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>了解@autoreleasepool</strong></p>
+<p>NSRunLoop等实现不论ARC有效还是无效，均能够随时释放注册到autoreleasepool中的对象</p>
+<p>autoreleasepool 范围以块级源代码表示，提高了程序的可读性，所以今后在ARC无效时也推荐使用@autoreleasepool块。</p>
+<hr>
+<h5 id="B-具体的ARC规则"><a href="#B-具体的ARC规则" class="headerlink" title="B.具体的ARC规则"></a>B.具体的ARC规则</h5><ul>
+<li>不能使用retain/release/retainCount/autorelease</li>
+<li>不能使用NSAllocateObject/NSDeallocateObject</li>
+<li>须遵守内存管理的方法命名规则</li>
+<li>不要显示调用dealloc</li>
+<li>使用@autoreleasepool块替代NSAutoreleasePool</li>
+<li>不能使用区域（NSZone)</li>
+<li>对象型变量不能作为C语言结构体（struct/union)的成员</li>
+<li>显示转换“id”和“void * ”</li>
+</ul>
+<h5 id="1-不能使用retain-release-retainCount-autorelease"><a href="#1-不能使用retain-release-retainCount-autorelease" class="headerlink" title="1).不能使用retain/release/retainCount/autorelease"></a>1).不能使用retain/release/retainCount/autorelease</h5><p>设置ARC有效时，无需（禁止）再次键入retain或release代码</p>
+<p>即使ARC被设置为无效时，该源代码也完全不符合引用计数式内存管理的思考方式。</p>
+<h5 id="2-不能使用NSAllocateObject-NSDeallocateObject"><a href="#2-不能使用NSAllocateObject-NSDeallocateObject" class="headerlink" title="2).不能使用NSAllocateObject/NSDeallocateObject"></a>2).不能使用NSAllocateObject/NSDeallocateObject</h5><h5 id="3-须遵守内存管理的方法命名规则"><a href="#3-须遵守内存管理的方法命名规则" class="headerlink" title="3).须遵守内存管理的方法命名规则"></a>3).须遵守内存管理的方法命名规则</h5><ul>
+<li>alloc</li>
+<li>new</li>
+<li>copy</li>
+<li>mutableCopy</li>
+<li><p>init（ARC有效时，更严格，改方法必须是实例方法，并且必须要返回对象，返回的对象应为id类型或该方法声明类的对象类型，抑或是该类的超类或子类型）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">虽然以init开始的方法但并不包含在上述命名规则里</span><br><span class="line"> - (void) initialize;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="4-不要显示调用dealloc"><a href="#4-不要显示调用dealloc" class="headerlink" title="4).不要显示调用dealloc"></a>4).不要显示调用dealloc</h5><p>deallo方法在大多数情况下适用于删除已注册的代理或观察者对象</p>
+<h5 id="5-使用-autoreleasepool块替代NSAutoreleasePool"><a href="#5-使用-autoreleasepool块替代NSAutoreleasePool" class="headerlink" title="5).使用@autoreleasepool块替代NSAutoreleasePool"></a>5).使用@autoreleasepool块替代NSAutoreleasePool</h5><h5 id="6-不能使用区域（NSZone"><a href="#6-不能使用区域（NSZone" class="headerlink" title="6).不能使用区域（NSZone)"></a>6).不能使用区域（NSZone)</h5><p>区域在现在的运行时系统已经单纯地被忽略</p>
+<h5 id="7-对象型变量不能作为C语言结构体（struct-union-的成员"><a href="#7-对象型变量不能作为C语言结构体（struct-union-的成员" class="headerlink" title="7).对象型变量不能作为C语言结构体（struct/union)的成员"></a>7).对象型变量不能作为C语言结构体（struct/union)的成员</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct data&#123;</span><br><span class="line">   NSMutableArray *array;</span><br><span class="line">&#125;;</span><br><span class="line">error: ARC forbids Objective-C objs in structs or unions</span><br><span class="line">NSMutableArray *array;</span><br></pre></td></tr></table></figure>
+<p>要把对象型变量加入到机构提成员中时，可强制转换为 void * 或是附加 __unsafe _unretained 修饰符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct Data&#123;</span><br><span class="line">      NSMutableArray __unsafe_unretained *array;</span><br><span class="line">&#125;;</span><br><span class="line">附有 __unsafe_unretained 修饰符的变量不属于编译器的内存管理对象</span><br></pre></td></tr></table></figure>
+<h5 id="8-显示转换“id”和“void-”"><a href="#8-显示转换“id”和“void-”" class="headerlink" title="8).显示转换“id”和“void * ”"></a>8).显示转换“id”和“void * ”</h5><p>  <strong>__bridge 转换</strong></p>
+<ul>
+<li>安全性与赋值低，容易因为悬垂指针而导致程序奔溃   </li>
+<li>还有<strong>bridge_retained 与 </strong>bridge_transfer两种转换</li>
+<li>在Objective-C对象与Core Foundation 对象之间相互变换</li>
+</ul>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><table>
+<thead>
+<tr>
+<th>属性声明的属性</th>
+<th>所有权修饰符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assign</td>
+<td>__unsafe  _unretained 修饰符</td>
+</tr>
+<tr>
+<td>copy（不是简单的赋值，它赋值的是通过NSCopying接口的copyWithZone:方法赋值源所生成的对象</td>
+<td>__strong 修饰符 (赋值的是被复制的对象）</td>
+</tr>
+<tr>
+<td>retain</td>
+<td>__strong 修饰符</td>
+</tr>
+<tr>
+<td>strong</td>
+<td>__strong 修饰符</td>
+</tr>
+<tr>
+<td>unsafe_unretained</td>
+<td>__unsafe _unretained</td>
+</tr>
+<tr>
+<td>weak</td>
+<td>__weak 修饰符</td>
+</tr>
+</tbody>
+</table>
+<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><p>在分配内存时推荐使用calloc函数</p>
+<h5 id="C-ARC的实现"><a href="#C-ARC的实现" class="headerlink" title="C. ARC的实现"></a>C. ARC的实现</h5><p>ARC由以下工具、库来说实现</p>
+<ul>
+<li>clang (LLVM编译器）3.0以上</li>
+<li>objc4 Objective-C 运行时库 493.9以上</li>
+</ul>
+<p><strong>__strong修饰符</strong></p>
+<table>
+<thead>
+<tr>
+<th>objc_retainAutoreleasedReturnValue</th>
+<th>objc_autoreleaseReturnValue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alloc/new/copy/mutableCopy之外类方法等返回对象的实现上</td>
+<td>alloc/new/copy/mutableCopy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>__weak修饰符</strong> [重点]</p>
+<ul>
+<li>若附有__weak 修饰符的变量所引用的对象被废弃，则将nil赋值给该变量</li>
+<li><p>使用附有__weak 修饰符的变量，即是使用注册到autoreleasepool中的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> id __weak obj1 = obj;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/* 编译器模拟代码*/</span><br><span class="line">id obj1;</span><br><span class="line">objc_initWeak(&amp;obj1,obj);</span><br><span class="line">objc_destoryWeak(&amp;obj1);</span><br><span class="line">*******</span><br><span class="line">obj1 = 0;</span><br><span class="line">objc_storeWeak(&amp;obj1,obj);</span><br><span class="line"> *******</span><br></pre></td></tr></table></figure>
+<p><strong>objc_storeWeak 函数把第二参数的赋值对象的地址作为键值，将第一参数的附有__weak修饰符的变量的地址注册到weak表中。如果第二参数为 0，则把变量的地址从weak表中删除。weak表与引用计数表相同，作为散列表被实现。</strong></p>
+<blockquote>
+<p>释放对象，程序的动作：</p>
+<ul>
+<li>objc_release</li>
+<li>引用计数为0，执行dealloc</li>
+<li>_ objc _rootDealloc</li>
+<li>object_dispose</li>
+<li>objc_destructInstance</li>
+<li>objc_clear_deallocating<br>objc _clear _deallocating的函数动作<blockquote>
+<p> 1.从weak表中获取废弃对象的地址为键值的记录<br> 2.将包含在记录中的所有附有__weak修饰符变量的地址，赋值为nil<br> 3.从weak表中删除该记录<br> 4.从引用计数表中删除废弃对象的地址为键值的记录</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>只在需要避免循环引用时使用__weak修饰符，否则会消耗相应的CPU资源</p>
+<p><strong>__autoreleasing修饰符</strong></p>
+<p><strong>引用计数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   id __strong obj = [[NSObject alloc] init];</span><br><span class="line">   NSLog(@&quot;retain count = %d&quot;,_objc_rootRetainCount(obj));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际上并不能够完全信任_objc_rootRetainCount函数取得的数值。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechatPay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -203,145 +455,68 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/FMDB的使用方法（附Demo)/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/FMDB的使用方法（附Demo)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          FMDB的使用方法（附Demo)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在Object-C中学习数据结构与算法之排序算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/FMDB的使用方法（附Demo)/">FMDB的使用方法（附Demo)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/多线程与内存管理读书摘录（引用计数ARC篇）/">多线程与内存管理读书摘录（引用计数ARC篇）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/" class="archive-article-date">
-  	<time datetime="2018-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/22/在Object-C中学习数据结构与算法之排序算法/">在Object-C中学习数据结构与算法之排序算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -364,8 +539,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
